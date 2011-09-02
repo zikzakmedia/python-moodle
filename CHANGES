@@ -1,0 +1,17 @@
+Changes
+=======
+
+Version 0.0.1
+-------------
+
+* Rest protocol connection
+* XML-RPC protocol connection
+* TODO: SOAP and AMF Protocols
+* Webserices available
+    * create_courses(server, courses)
+    * get_courses(server)
+    * create_users(server, users)
+    * update_users(server, users)
+    * get_users(server, user_ids)
+    * enrol_users(server, enrols)
+* update courses webservice available Moodle version 2.2. TODO

@@ -1,0 +1,95 @@
+Moodle - Webservice Moodle in Python
+=========================================================================================
+Webservice functions to Moodle
+
+Installation
+------------------------------------------------------------------------------------------
+Installing Moodle Webservice is fairly easy. You can...
+
+    sudo python setup.py install  
+    
+Setting up Moodle 2.0.x web services
+------------------------------------------------------------------------------------------
+1. Enable web services
+   - Site administration => Plugins => Web services => Overview => Enable web services
+
+2. Enable REST or XML-RPC protocol
+   - Site administration => Plugins => Web services => Overview => Enable protocols
+
+3. Create web services user with Admin rights (for web services authentication)
+   - Site administration => Plugins => Web services => Overview => Create a specific user	
+
+4. Set permissions
+   - Site administration => Plugins => Web services => Overview => Check user capability
+
+5. Add a service
+   - Site administration => Plugins => Web services => Overview => Select a service
+   - => add (eg. moodle/user:wiewalldetails: View user full information)
+
+6. Add functions you want access to
+   - Site administration => Plugins => Web services => Overview => Select a service
+   - => Functions => Add functions (eg. moodle_user_create_users, moodle_user_create_users)
+
+7. Allow web services user access to web service
+   - Site administration => Plugins => Web services => Overview => Select a service
+   - => Authorised users
+
+8. Create security token
+   - Site administration => Plugins => Web services => Overview => Create a token for a user
+
+Example Use
+-----------------------------------------------------------------------------------------------------
+Create a new course:
+
+    from moodle import MDL
+    mdl = MDL()
+
+    # Connect to moodle data
+    server = {
+        'protocol': 'xmlrpc', # xmlrpc, rest
+        'uri': 'http://www.mymoodle.org',
+        'token': 'yourtokenkeymoodle',
+    }
+
+    # Create new courses
+    courses = [{
+        'shortname': 'New Course', # shortname must be unique
+        'fullname': 'New Course Zikzakmedia',
+        'categoryid': 1,
+        #'visible': 1,
+        'id': 2,
+        #'maxbytes': 2097152,
+        #'showreports': 0,
+        #'startdate': 1314396000,
+        #'defaultgroupingid': 0,
+        #'summaryformat': 1,
+        #'completionstartonenrol': 0,
+        #'groupmode': 0,
+        #'numsections': 10,
+        #'showgrades': 1,
+        #'enablecompletion': 0,
+        #'hiddensections': 0,
+        #'format': 'topics',
+        #'completionnotify': 0,
+        #'lang': '',
+        #'categorysortorder': 10001,
+        #'timecreated': 1314367091,
+        #'groupmodeforce': 0,
+        #'forcetheme': '',
+        #'summary': u'<p>\ufeff</p>',
+        #'idnumber': '',
+        #'newsitems': 5,
+        #'timemodified': 1314367091
+    }]
+    mdl.create_courses(server, courses)
+
+The implemented methods and APIs are:
+
+    * create_courses(server, courses)
+    * get_courses(server)
+    * create_users(server, users)
+    * update_users(server, users)
+    * get_users(server, user_ids)
+    * enrol_users(server, enrols)
+
+For more examples, see examples dir
